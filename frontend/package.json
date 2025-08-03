@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@wailsio/runtime": "latest"
+    "@tailwindcss/vite": "^4.1.11",
+    "@wailsio/runtime": "latest",
+    "daisyui": "^5.0.50",
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "vite": "^5.0.0"

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/wails.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Wails App</title>
   </head>
   <body>
@@ -18,12 +18,19 @@
       <div class="card">
         <div class="result" id="result">Please enter your name below 👇</div>
         <div class="input-box" id="input">
-          <input class="input" id="name" type="text" autocomplete="off" />
+          <input
+            class="input focus:outline-none"
+            id="name"
+            type="text"
+            autocomplete="off"
+          />
           <button class="btn" onclick="doGreet()">Greet</button>
         </div>
       </div>
       <div class="footer">
-        <div><p>Click on the Wails logo to learn more</p></div>
+        <div>
+          <p>Click on the Wails logo to learn more</p>
+        </div>
         <div><p id="time">Listening for Time event...</p></div>
       </div>
     </div>
