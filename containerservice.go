@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os/exec"
 )
@@ -14,18 +15,23 @@ func (c *ContainerService) CheckContainerServiceRunning() bool {
 	return err == nil
 }
 
-func (c *ContainerService) StartContainerService() {
+func (c *ContainerService) StartContainerService() error {
 	cmd := exec.Command("container", "system", "start")
 	_, err := cmd.Output()
 	if err != nil {
 		fmt.Println("Failed to start container")
+		return err
 	}
+
+	return nil
 }
 
-func (c *ContainerService) StopContainerService() {
+func (c *ContainerService) StopContainerService() error {
 	cmd := exec.Command("container", "system", "stop")
 	_, err := cmd.Output()
 	if err != nil {
 		fmt.Println("Failed to stop container")
+		return errors.New("Failed to stop container")
 	}
+	return nil
 }

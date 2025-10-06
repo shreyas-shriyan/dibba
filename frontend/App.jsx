@@ -31,14 +31,28 @@ export function App() {
           {isContainerRunning.value ? (
             <button
               className="btn btn-error"
-              onClick={() => ContainerService.StopContainerService()}
+              onClick={() =>
+                ContainerService.StopContainerService()
+                  .then(() => (isContainerRunning.value = false))
+                  .catch((err) => {
+                    console.log(err);
+                  })
+              }
             >
               Stop
             </button>
           ) : (
             <button
               className="btn btn-success"
-              onClick={() => ContainerService.StartContainerService()}
+              onClick={() =>
+                ContainerService.StartContainerService()
+                  .then(() => {
+                    isContainerRunning.value = true;
+                  })
+                  .catch((err) => {
+                    console.log("ssssss", err);
+                  })
+              }
             >
               Start
             </button>
