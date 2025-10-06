@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@preact/preset-vite": "^2.10.2",
+    "@preact/signals": "^2.3.2",
     "@tailwindcss/vite": "^4.1.11",
     "@wailsio/runtime": "latest",
     "daisyui": "^5.0.50",
+    "preact": "^10.27.2",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

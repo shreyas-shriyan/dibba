@@ -4,6 +4,7 @@ import (
 	"embed"
 	_ "embed"
 	"log"
+	"os/exec"
 	"time"
 
 	"github.com/wailsapp/wails/v3/pkg/application"
@@ -31,7 +32,7 @@ func main() {
 		Name:        "dibba",
 		Description: "A demo of using raw HTML & CSS",
 		Services: []application.Service{
-			application.NewService(&GreetService{}),
+			application.NewService(&ContainerService{}),
 		},
 		Assets: application.AssetOptions{
 			Handler: application.AssetFileServerFS(assets),
@@ -53,17 +54,20 @@ func main() {
 			Backdrop:                application.MacBackdropTranslucent,
 			TitleBar:                application.MacTitleBarHiddenInset,
 		},
-		BackgroundColour: application.NewRGB(27, 38, 54),
-		URL:              "/",
+		// BackgroundColour: application.NewRGB(27, 38, 54),
+		URL: "/",
 	})
 
 	// Create a goroutine that emits an event containing the current time every second.
 	// The frontend can listen to this event and update the UI accordingly.
 	go func() {
 		for {
-			now := time.Now().Format(time.RFC1123)
-			app.Event.Emit("time", now)
-			time.Sleep(time.Second)
+			cmd := exec.Command("container", "system", "status")
+			_, err := cmd.Output()
+
+			app.Event.Emit("containerStatus", err == nil)
+
+			time.Sleep(time.Second * 10)
 		}
 	}()
 
