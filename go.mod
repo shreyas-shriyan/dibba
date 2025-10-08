@@ -2,9 +2,7 @@ module github.com/shreyas-shriyan/dibba
 
 go 1.24.0
 
-toolchain go1.24.4
-
-require github.com/wailsapp/wails/v3 v3.0.0-alpha.17
+require github.com/wailsapp/wails/v3 v3.0.0-alpha.34
 
 require (
 	dario.cat/mergo v1.0.1 // indirect
