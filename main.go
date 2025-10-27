@@ -2,7 +2,7 @@ package main
 
 import (
 	"embed"
-	_ "embed"
+	"fmt"
 	"log"
 	"os/exec"
 	"time"
@@ -58,6 +58,13 @@ func main() {
 		// BackgroundColour: application.NewRGB(27, 38, 54),
 		URL: "/",
 	})
+
+	// Automatically start container service
+	cmd := exec.Command("containe", "system", "start")
+	_, error := cmd.Output()
+	if error != nil {
+		fmt.Println("Failed to start container", error)
+	}
 
 	// Create a goroutine that emits an event containing the current time every second.
 	// The frontend can listen to this event and update the UI accordingly.
