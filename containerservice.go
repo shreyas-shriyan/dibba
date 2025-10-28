@@ -31,7 +31,7 @@ func (c *ContainerService) StopContainerService() error {
 	_, err := cmd.Output()
 	if err != nil {
 		fmt.Println("Failed to stop container")
-		return errors.New("Failed to stop container")
+		return errors.New("failed to stop container")
 	}
 	return nil
 }

@@ -33,26 +33,28 @@ const ContainerStatus = () => {
     <div class="flex items-center gap-2">
       <div
         class={`w-3 h-3 rounded-full ${
-          isContainerRunning.value ? "bg-green-500" : "bg-red-500"
+          isContainerRunning.value ? "bg-success" : "bg-red-500"
         }`}
       ></div>
       <span class="text-sm text-gray-600">
-        {isContainerRunning.value ? "Service: Running" : "Service: Stopped"}
+        Service: {isContainerRunning.value ? "Running" : "Stopped"}
       </span>
       {!isContainerRunning.value && (
         <svg
-          className="w-5 h-5 text-success hover:text-success cursor-pointer transition-colors"
+          class="humbleicons hi-restart text-success cursor-pointer transition-colors"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
           fill="none"
-          stroke="currentColor"
           viewBox="0 0 24 24"
           onClick={handleRestart}
           title="Restart Service"
         >
           <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+            d="M4 4v5h5M5.07 8a8 8 0 1 1-.818 6"
           />
         </svg>
       )}
