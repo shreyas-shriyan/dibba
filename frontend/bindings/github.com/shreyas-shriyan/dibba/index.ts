@@ -7,3 +7,7 @@ export {
     ContainerService,
     ImageService
 };
+
+export {
+    Image
+} from "./models.js";

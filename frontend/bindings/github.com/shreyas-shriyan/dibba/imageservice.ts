@@ -5,10 +5,20 @@
 // @ts-ignore: Unused imports
 import { Call as $Call, CancellablePromise as $CancellablePromise, Create as $Create } from "@wailsio/runtime";
 
-export function ListImages(): $CancellablePromise<string> {
-    return $Call.ByID(4186020358);
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: Unused imports
+import * as $models from "./models.js";
+
+export function ListImages(): $CancellablePromise<$models.Image[]> {
+    return $Call.ByID(4186020358).then(($result: any) => {
+        return $$createType1($result);
+    });
 }
 
 export function PullImage(imageName: string): $CancellablePromise<string> {
     return $Call.ByID(40965272, imageName);
 }
+
+// Private type creation functions
+const $$createType0 = $models.Image.createFrom;
+const $$createType1 = $Create.Array($$createType0);

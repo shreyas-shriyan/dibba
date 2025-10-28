@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import {
   ListImages,
   PullImage,
@@ -27,25 +27,55 @@ const ImagePull = () => {
 
   const getImages = async () => {
     const data = await ListImages();
-    console.log(data);
+    setImages(data);
   };
 
+  useEffect(() => {
+    getImages();
+  }, []);
+
   return (
-    <div className="flex gap-2 w-full justify-center">
-      <div className="flex gap-2 w-1/2">
-        <button onClick={() => getImages()}>refresh</button>
-        <input
-          id="imageName"
-          className="input rounded-full focus:outline-none"
-        ></input>
-        <button className="btn btn-success rounded-full">
-          {isLoading ? (
-            <span className="loading loading-dots loading-xs"></span>
-          ) : (
-            <span onClick={() => pullImage()}>Pull</span>
-          )}
-        </button>
+    <div>
+      <div className="flex gap-2 w-full justify-center">
+        <div className="flex gap-2 w-1/2">
+          <button onClick={() => getImages()}>refresh</button>
+          <input
+            id="imageName"
+            className="input rounded-full focus:outline-none"
+          ></input>
+          <button className="btn btn-success rounded-full cursor-pointer shadow-none">
+            {isLoading ? (
+              <span className="loading loading-dots loading-xs"></span>
+            ) : (
+              <span onClick={() => pullImage()}>Pull</span>
+            )}
+          </button>
+        </div>
+        {/* create a table with the images */}
       </div>
+      <table className="table table-zebra table-pin-rows table-sm">
+        <thead>
+          <tr>
+            <th>Image Name</th>
+            <th>tag</th>
+            <th>Size</th>
+            <th>Created</th>
+            <th>MediaType</th>
+          </tr>
+        </thead>
+        <tbody>
+          {images.map((image) => (
+            <tr key={image.reference}>
+              <td>{image.imageName}</td>
+              <td>{image.tag}</td>
+              <td>{image.size}</td>
+              <td>{new Date(image.created).toLocaleString()}</td>
+
+              <td>{image.mediaType}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
