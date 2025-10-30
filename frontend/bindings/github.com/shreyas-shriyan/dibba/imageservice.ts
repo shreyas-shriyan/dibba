@@ -15,6 +15,12 @@ export function ListImages(): $CancellablePromise<$models.Image[]> {
     });
 }
 
+export function ListImagesV2(): $CancellablePromise<$models.ImageV2[]> {
+    return $Call.ByID(5382758).then(($result: any) => {
+        return $$createType3($result);
+    });
+}
+
 export function PullImage(imageName: string): $CancellablePromise<string> {
     return $Call.ByID(40965272, imageName);
 }
@@ -22,3 +28,5 @@ export function PullImage(imageName: string): $CancellablePromise<string> {
 // Private type creation functions
 const $$createType0 = $models.Image.createFrom;
 const $$createType1 = $Create.Array($$createType0);
+const $$createType2 = $models.ImageV2.createFrom;
+const $$createType3 = $Create.Array($$createType2);

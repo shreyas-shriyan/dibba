@@ -49,3 +49,44 @@ export class Image {
         return new Image($$parsedSource as Partial<Image>);
     }
 }
+
+export class ImageV2 {
+    "name": string;
+    "tag": string;
+    "imageId": string;
+    "architecture": string;
+    "size": string;
+    "created": string;
+
+    /** Creates a new ImageV2 instance. */
+    constructor($$source: Partial<ImageV2> = {}) {
+        if (!("name" in $$source)) {
+            this["name"] = "";
+        }
+        if (!("tag" in $$source)) {
+            this["tag"] = "";
+        }
+        if (!("imageId" in $$source)) {
+            this["imageId"] = "";
+        }
+        if (!("architecture" in $$source)) {
+            this["architecture"] = "";
+        }
+        if (!("size" in $$source)) {
+            this["size"] = "";
+        }
+        if (!("created" in $$source)) {
+            this["created"] = "";
+        }
+
+        Object.assign(this, $$source);
+    }
+
+    /**
+     * Creates a new ImageV2 instance from a string or object.
+     */
+    static createFrom($$source: any = {}): ImageV2 {
+        let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
+        return new ImageV2($$parsedSource as Partial<ImageV2>);
+    }
+}

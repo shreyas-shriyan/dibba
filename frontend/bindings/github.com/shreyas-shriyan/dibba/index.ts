@@ -9,5 +9,6 @@ export {
 };
 
 export {
-    Image
+    Image,
+    ImageV2
 } from "./models.js";

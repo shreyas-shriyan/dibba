@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import {
-  ListImages,
+  ListImagesV2,
   PullImage,
 } from "../bindings/github.com/shreyas-shriyan/dibba/imageservice";
 import { useToast } from "./Toast";
@@ -26,7 +26,7 @@ const ImagePull = () => {
   };
 
   const getImages = async () => {
-    const data = await ListImages();
+    const data = await ListImagesV2();
     setImages(data);
   };
 
@@ -56,22 +56,23 @@ const ImagePull = () => {
       <table className="table table-zebra table-pin-rows table-sm">
         <thead>
           <tr>
-            <th>Image Name</th>
-            <th>tag</th>
-            <th>Size</th>
+            <th>Repository</th>
+            <th>Tag</th>
+            <th>Image Id</th>
             <th>Created</th>
-            <th>MediaType</th>
+            <th>Architecture</th>
+            <th>Size</th>
           </tr>
         </thead>
         <tbody>
           {images.map((image) => (
-            <tr key={image.reference}>
-              <td>{image.imageName}</td>
+            <tr key={image.imageId}>
+              <td>{image.name}</td>
               <td>{image.tag}</td>
+              <td>{image.imageId}</td>
+              <td>{image.created}</td>
+              <td>{image.architecture}</td>
               <td>{image.size}</td>
-              <td>{new Date(image.created).toLocaleString()}</td>
-
-              <td>{image.mediaType}</td>
             </tr>
           ))}
         </tbody>

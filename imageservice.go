@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"os/exec"
 	"runtime"
 	"strings"
@@ -23,6 +24,49 @@ type Image struct {
 	ImageName string `json:"imageName"`
 	Tag       string `json:"tag"`
 	Created   string `json:"created"`
+}
+
+type ImageV2 struct {
+	Name         string `json:"name"`
+	Tag          string `json:"tag"`
+	ImageId      string `json:"imageId"`
+	Architecture string `json:"architecture"`
+	Size         string `json:"size"`
+	Created      string `json:"created"`
+}
+
+func (c *ImageService) ListImagesV2() ([]ImageV2, error) {
+	cmd := exec.Command("container", "image", "ls", "-v")
+	data, err := cmd.CombinedOutput()
+	if err != nil {
+		return nil, err
+	}
+
+	lines := strings.Split(string(data), "\n")
+	var images []ImageV2
+	for i, line := range lines {
+		if i == 0 || len(line) == 0 {
+			continue
+		}
+		fields := strings.Fields(line)
+		fmt.Println(fields, len(fields))
+		sizeIndex := 5
+		createdIndex := 7
+		if len(fields) > 9 {
+			sizeIndex = 6
+			createdIndex = 8
+		}
+		images = append(images, ImageV2{
+			Name:         fields[0],
+			Tag:          fields[1],
+			ImageId:      fields[2],
+			Architecture: fields[4],
+			Size:         fields[sizeIndex] + " " + fields[sizeIndex+1],
+			Created:      fields[createdIndex],
+		})
+	}
+
+	return images, nil
 }
 
 func (c *ImageService) ListImages() ([]Image, error) {
