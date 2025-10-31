@@ -17,6 +17,7 @@ const ImagePull = () => {
     try {
       await PullImage(imageName.toLowerCase());
       success(`Pulled image: ${imageName}`);
+      getImages();
     } catch (err) {
       console.log("pullImage error", err);
       error(`Failed to pull: ${imageName}`);
