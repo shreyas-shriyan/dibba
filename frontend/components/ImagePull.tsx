@@ -15,7 +15,7 @@ const ImagePull = () => {
       .value;
     setIsLoading(true);
     try {
-      await PullImage(imageName);
+      await PullImage(imageName.toLowerCase());
       success(`Pulled image: ${imageName}`);
     } catch (err) {
       console.log("pullImage error", err);
@@ -42,6 +42,9 @@ const ImagePull = () => {
           <input
             id="imageName"
             className="input rounded-full focus:outline-none"
+            autocapitalize="none"
+            autocorrect="off"
+            spellcheck={false}
           ></input>
           <button className="btn btn-success rounded-full cursor-pointer shadow-none">
             {isLoading ? (
