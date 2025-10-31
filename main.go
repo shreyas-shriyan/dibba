@@ -60,7 +60,7 @@ func main() {
 	})
 
 	// Automatically start container service
-	cmd := exec.Command("containe", "system", "start")
+	cmd := exec.Command("container", "system", "start")
 	_, error := cmd.Output()
 	if error != nil {
 		fmt.Println("Failed to start container", error)
