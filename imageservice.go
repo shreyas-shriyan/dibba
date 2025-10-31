@@ -11,7 +11,7 @@ import (
 type ImageService struct{}
 
 func (c *ImageService) PullImage(imageName string) (string, error) {
-	cmd := exec.Command("container", "image", "pull", imageName)
+	cmd := exec.Command("container", "image", "pull", imageName, "--platform", "linux/"+runtime.GOARCH)
 	data, err := cmd.CombinedOutput()
 	return string(data), err
 }
